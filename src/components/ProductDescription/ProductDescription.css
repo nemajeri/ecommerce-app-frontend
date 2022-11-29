@@ -1,0 +1,22 @@
+.product-description {
+    display: flex;
+    justify-content: center;
+    margin: 100px;
+    padding: 200px 20px;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    gap: 15%;
+  }
+  
+  .product-description > img {
+    max-height: 300px;
+    width: 20%;
+    object-fit: contain;
+    margin-bottom: 15px;
+    margin-left: 30px
+  }
+  
+  .product-description__info {
+    line-height: 50px;
+  }
