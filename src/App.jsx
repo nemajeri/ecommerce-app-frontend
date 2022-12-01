@@ -1,5 +1,12 @@
 import './App.css';
-import { Home, ProductPage, Login, Register, AddProductPage } from './pages/index';
+import {
+  Home,
+  ProductPage,
+  Login,
+  Register,
+  AddProductPage,
+  EditProductPage
+} from './pages/index';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -7,7 +14,8 @@ function App() {
     <Router>
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/cart' element={<ProductPage />} />
+        <Route path='/product-desc/:id' element={<ProductPage />} />
+        <Route path='/products/:id' element={<EditProductPage />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
         <Route path='/add-product' element={<AddProductPage />} />

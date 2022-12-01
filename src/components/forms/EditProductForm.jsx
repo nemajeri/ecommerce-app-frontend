@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 
-const AddProductForm = () => {
+const AddProductForm = ({ id }) => {
   const [input, setInput] = useState({
     title: '',
     price: '',
@@ -12,8 +12,9 @@ const AddProductForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const searchParams = new URLSearchParams(input);
     axios
-      .post('http://localhost:8080/api/v1/products/add-product', input)
+      .put(`http://localhost:8080/api/v1/products/${id}?${searchParams.toString()}`)
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
@@ -36,12 +37,12 @@ const AddProductForm = () => {
   };
 
   return (
-    <div className='container' onSubmit={handleSubmit}>
-      <form className='form'>
+    <div className='container'>
+      <form className='form' onSubmit={handleSubmit}>
         <div className='form_inputs'>
-          <h1>Create Product</h1>
+          <h1>Edit Product</h1>
           <div className='flex-column'>
-            <label>Add title</label>
+            <label>Add new title</label>
             <input
               type='text'
               value={input.title}
@@ -51,7 +52,7 @@ const AddProductForm = () => {
             />
           </div>
           <div className='flex-column'>
-            <label>Add price</label>
+            <label>Add new price</label>
             <input
               type='number'
               value={input.price}
@@ -61,7 +62,7 @@ const AddProductForm = () => {
             />
           </div>
           <div className='flex-column'>
-            <label>Add rating</label>
+            <label>Add new rating</label>
             <input
               type='number'
               value={input.rating}
@@ -71,7 +72,7 @@ const AddProductForm = () => {
             />
           </div>
           <div className='flex-column'>
-            <label>Add image</label>
+            <label>Add new image</label>
             <input
               type='file'
               onChange={(e) => setSelectedFile(e.target.files[0])}
@@ -80,7 +81,7 @@ const AddProductForm = () => {
             />
           </div>
           <div className='flex-column'>
-            <label>Add description</label>
+            <label>Add new description</label>
             <input
               type='text'
               value={input.description}

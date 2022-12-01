@@ -1,22 +1,33 @@
 import React from 'react';
+import axios from 'axios';
 import './ProductDescription.css';
 
-const ProductDescription = () => {
+const ProductDescription = ({product: { id, title, image, price, rating, description}}) => {
+
+  const tryCatchAxiosDelete = () => {
+    try {
+      axios.delete(`http://localhost:8080/api/v1/products/${id}`)
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+      })
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   return (
     <div className='product-description'>
       <img src={require(`../../assets/samsung-monitor.jpg`)} alt='order' />
       <div className='product-description__info'>
-        <h1>Samsung Galaxy Smart Tv 5550 X</h1>
-        <p>3🌟</p>
+        <h1>{title}</h1>
+        <p>{rating}🌟</p>
         <hr></hr>
-        <h4>Price: 25000$</h4>
+        <h4>Price: {price}$</h4>
         <h2>Description</h2>
-        <p>Some description here</p>
+        <p>{description}</p>
         <div className='flex gp'>
-        <button className='btn-primary px-1'>Delete</button>
-        <button className='btn-light px-1'>
-          <p className='text-primary'>Edit</p>
-        </button>
+        <button className='btn-primary px-1' onClick={tryCatchAxiosDelete}>Delete</button>
         </div>
       </div>
     </div>

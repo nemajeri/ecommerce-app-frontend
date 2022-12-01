@@ -8,15 +8,18 @@ import { Link } from 'react-router-dom';
 const Home = () => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
-    axios
-      .get('http://localhost:8080/api/v1/products')
-      .then((response) => {
-        setProducts(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    getAllProducts();
   }, []);
+
+  const getAllProducts = async () => {
+    try {
+    const response = await axios
+    .get('http://localhost:8080/api/v1/products')
+      setProducts(response.data);
+    } catch (error){
+      console.log(error);
+    } 
+  };
 
   return (
     <>
@@ -32,10 +35,11 @@ const Home = () => {
           <button className='btn my-1'>Add New Product</button>
         </Link>
         <div className='grid-3'>
-          {products.map((product, i) => {
+          {products.map((product) => {
             return (
               <Product
-                key={i}
+                key={product.id}
+                id={product.id}
                 title={product.title}
                 price={product.price}
                 rating={product.rating}

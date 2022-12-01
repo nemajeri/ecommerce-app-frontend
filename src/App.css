@@ -357,6 +357,8 @@ input[type='text'],
 input[type='email'],
 input[type='password'],
 input[type='date'],
+input[type='number'],
+input[type='image'],
 select,
 textarea {
   width: 100%;
@@ -413,6 +415,10 @@ table th {
   color: #f4f4f4;
 }
 
+.navbar > input[type='text'] {
+  width: 80%;
+}
+
 /* Subbar */
 
 .subbar {
@@ -426,19 +432,10 @@ table th {
     opacity: 0.9;
     background-color: #222d3b;
 }
-
-.subbar ul {
-    display: flex;
-  }
   
-.subbar a {
+.subbar h3 {
     color: #f4f4f4;
-    padding: 1rem;
-    margin: 0 1rem;
-  }
 
-  .subbar a:hover {
-    color: var(--light-color);
   }
   
   /* Page-specific */
