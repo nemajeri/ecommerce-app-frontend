@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Navbar from '../layout/Navbar';
 import ProductDescription from '../components/ProductDescription/ProductDescription';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -25,11 +24,10 @@ const ProductPage = () => {
 
   return (
     <>
-      <Navbar />
       <div className='container'>
         <ProductDescription product={product}/>
       </div>
-    </>
+    </> 
   );
 };
 

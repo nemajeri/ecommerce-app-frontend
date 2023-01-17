@@ -41,12 +41,16 @@ img {
   width: 100%;
 }
 
+button {
+  cursor: pointer;
+}
+
 /* Utilities */
 .container {
   max-width: 1500px;
   margin: auto;
   overflow: hidden;
-  padding: 0 2rem;
+  padding: 2rem 2rem;
 }
 
 /* Text Styles*/
@@ -255,6 +259,7 @@ img {
   border-color: #a88734 #9c7e31 #846a29;
   color: #111;
   padding: 5px;
+  cursor: pointer;
 }
 
 .btn-link {
@@ -394,17 +399,17 @@ table th {
   z-index: 1;
   width: 100%;
   opacity: 0.9;
+  gap: 20px;
   background-color: #141921;
 }
 
 .navbar ul {
-  display: flex;
+  min-width: 60px;
+  text-align: center;
 }
 
 .navbar a {
   color: #f4f4f4;
-  padding: 1rem;
-  margin: 0 0.25rem;
 }
 
 .navbar a:hover {
@@ -427,7 +432,7 @@ table th {
     justify-content: center;
     align-items: center;
     padding: 1rem 2rem;
-    z-index: 1;
+    position: absolute;
     width: 100%;
     opacity: 0.9;
     background-color: #222d3b;
@@ -437,6 +442,31 @@ table th {
     color: #f4f4f4;
 
   }
+
+/*Portal*/  
+
+.portal_form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+.portal_background {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  background-color: grey;
+  opacity: 20%;
+}
+
+/*User Icon*/
+.icon-size {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
   
   /* Page-specific */
   .cart-page-order-items {
@@ -448,7 +478,7 @@ table th {
   .hide-sm {
     display: none;
   }
-
+  
   .grid-2,
   .grid-3,
   .grid-4 {
@@ -468,17 +498,12 @@ table th {
     font-size: 1rem;
   }
 
-  /* Navbar */
-  .navbar {
-    display: block;
-    text-align: center;
-  }
-
-  .navbar ul {
-    text-align: center;
-    justify-content: center;
+  .navbar h1 {
+    display: none;
   }
 }
+
+
 
 
 

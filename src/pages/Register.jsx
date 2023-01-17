@@ -7,9 +7,13 @@ const Register = () => {
 
   const element = 'Account';
 
+  const handleClick = () => {
+    setShowModal(true);
+}
+
   return (
     <div className='flex-column'>
-      <RegisterForm onClick={() => setShowModal(true)} />
+      <RegisterForm  handleClick={handleClick}/>
       <Modal show={showModal} element={element}/>
     </div>
   );

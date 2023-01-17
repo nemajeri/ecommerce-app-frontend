@@ -1,27 +1,42 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { IoClose } from 'react-icons/io5';
+import { IconContext } from "react-icons";
+import { useNavigate } from 'react-router-dom';
 
 const AddProductForm = ({ id }) => {
   const [input, setInput] = useState({
     title: '',
     price: '',
     rating: '',
+    image: '',
     description: '',
   });
   const [selectedFile, setSelectedFile] = useState(null);
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const searchParams = new URLSearchParams(input);
     axios
-      .put(`http://localhost:8080/api/v1/products/${id}?${searchParams.toString()}`)
-      .then((res) => console.log(res))
+      .put(`http://localhost:8080/api/v1/products/${id}`, input,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      } )
       .catch((err) => console.log(err));
+      setTimeout(() => {
+        navigate('/');
+      }, 200);
   };
 
   const onChange = (e) => {
     const { name, type, value } = e.target;
-
+    if(name === 'file') {
+    setSelectedFile(e.target.files[0])
+    setInput((input) => {
+      return { ...input, image: e.target.files[0].name };
+    });} else {
     setInput((input) => {
       const nextInput = { ...input };
 
@@ -34,11 +49,17 @@ const AddProductForm = ({ id }) => {
       }
       return nextInput;
     });
+    }
   };
 
   return (
     <div className='container'>
       <form className='form' onSubmit={handleSubmit}>
+      <div onClick={()=>navigate("/")}>
+      <IconContext.Provider value={{ color: "grey", className: "icon-size" }}>
+        <IoClose/>
+        </IconContext.Provider>
+        </div>
         <div className='form_inputs'>
           <h1>Edit Product</h1>
           <div className='flex-column'>
@@ -75,7 +96,7 @@ const AddProductForm = ({ id }) => {
             <label>Add new image</label>
             <input
               type='file'
-              onChange={(e) => setSelectedFile(e.target.files[0])}
+              onChange={onChange}
               name='file'
               placeholder='Image'
             />
@@ -92,7 +113,7 @@ const AddProductForm = ({ id }) => {
           </div>
         </div>
         <button className='btn-block' type='submit'>
-          Create
+          Edit
         </button>
       </form>
     </div>

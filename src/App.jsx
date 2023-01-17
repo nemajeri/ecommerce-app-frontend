@@ -4,21 +4,22 @@ import {
   ProductPage,
   Login,
   Register,
-  AddProductPage,
-  EditProductPage
+  EditProductPage,
+  UserDetailsPage
 } from './pages/index';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 function App() {
   return (
     <Router>
       <Routes>
+        <Route path='/user-details' element={<UserDetailsPage />}/>
+        <Route exact path='/login' element={<Login />} />
         <Route path='/' element={<Home />} />
         <Route path='/product-desc/:id' element={<ProductPage />} />
         <Route path='/products/:id' element={<EditProductPage />} />
-        <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
-        <Route path='/add-product' element={<AddProductPage />} />
+        <Route path='*' element={<Navigate to='/'/> }/>
       </Routes>
     </Router>
   );

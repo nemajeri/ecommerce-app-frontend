@@ -1,4 +1,5 @@
 .product-description {
+    position: relative;
     display: flex;
     justify-content: center;
     margin: 100px;
@@ -19,4 +20,24 @@
   
   .product-description__info {
     line-height: 50px;
+  }
+
+  .product-close_position {
+    position: absolute;
+    left: 30px;
+    top: 20px;
+  }
+
+
+  @media (max-width: 700px) {
+
+    .product-description {
+      flex-direction: column;
+      padding: 60px 20px;
+      margin: 0;
+    }
+
+    .product-description > img {
+      width: 50%;
+    }
   }

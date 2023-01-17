@@ -1,43 +1,57 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { IoClose } from 'react-icons/io5';
+import { IconContext } from "react-icons";
 
-const AddProductForm = () => {
+const AddProductForm = ({ closeForm }) => {
+  const [selectedFile, setSelectedFile] = useState(null);
   const [input, setInput] = useState({
     title: '',
     price: '',
     rating: '',
+    image: '',
     description: '',
   });
-  const [selectedFile, setSelectedFile] = useState(null);
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
       .post('http://localhost:8080/api/v1/products/add-product', input)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      .catch((err) => console.error(err));
+      closeForm()
   };
 
   const onChange = (e) => {
     const { name, type, value } = e.target;
-
-    setInput((input) => {
-      const nextInput = { ...input };
-
-      switch (type) {
-        case 'number':
-          nextInput[name] = Number(value);
-          break;
-        default:
-          nextInput[name] = value;
-      }
-      return nextInput;
-    });
+    if (name === 'file') {
+      setSelectedFile(e.target.files[0]);
+      setInput((input) => {
+        return { ...input, image: e.target.files[0].name };
+      });
+    } else {
+      setInput((input) => {
+        const nextInput = { ...input };
+        switch (type) {
+          case 'number':
+            nextInput[name] = Number(value);
+            break;
+          default:
+            nextInput[name] = value;
+        }
+        return nextInput;
+      });
+    }
   };
 
   return (
-    <div className='container' onSubmit={handleSubmit}>
-      <form className='form'>
+    <div className='container' >
+      <form className='form' onSubmit={handleSubmit}>
+        <div onClick={closeForm}>
+      <IconContext.Provider value={{ color: "grey", className: "icon-size" }}>
+        <IoClose/>
+        </IconContext.Provider>
+        </div>
         <div className='form_inputs'>
           <h1>Create Product</h1>
           <div className='flex-column'>
@@ -74,7 +88,7 @@ const AddProductForm = () => {
             <label>Add image</label>
             <input
               type='file'
-              onChange={(e) => setSelectedFile(e.target.files[0])}
+              onChange={onChange}
               name='file'
               placeholder='Image'
             />
@@ -91,7 +105,7 @@ const AddProductForm = () => {
           </div>
         </div>
         <button className='btn-block' type='submit'>
-          Create
+          Add
         </button>
       </form>
     </div>
